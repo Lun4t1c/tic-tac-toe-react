@@ -1,6 +1,6 @@
 import { SquareState } from "./types";
 
-export const calculateWinner = (squares: SquareState[]): SquareState | null => {
+export const calculateWinner = (squares: SquareState[]): SquareState => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],

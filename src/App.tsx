@@ -35,7 +35,7 @@ const Game: React.FC = () => {
 
   const moves = history.map((_, move) => {
     const desc = move ? `Go to move #${move}` : 'Go to game start';
-    
+
     return (
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{desc}</button>
@@ -52,13 +52,17 @@ const Game: React.FC = () => {
 
   return (
     <div className="container">
+
+      <div>{status}</div>
+
       <div className="game-board">
         <Board squares={current} onClick={handleClick} />
       </div>
+
       <div className="game-info">
-        <div>{status}</div>
         <ol>{moves}</ol>
       </div>
+
     </div>
   );
 };
