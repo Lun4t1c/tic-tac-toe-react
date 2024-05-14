@@ -1,65 +1,11 @@
 import React, { useState } from 'react';
-
-type Player = 'X' | 'O' | null;
-
-const initialBoard: Player[] = Array(9).fill(null);
-
-const calculateWinner = (squares: Player[]): Player | null => {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-};
-
-const Square: React.FC<{ value: Player; onClick: () => void }> = ({ value, onClick }) => {
-  return (
-    <button className="square" onClick={onClick}>
-      {value}
-    </button>
-  );
-};
-
-const Board: React.FC<{ squares: Player[]; onClick: (i: number) => void }> = ({ squares, onClick }) => {
-  const renderSquare = (i: number) => {
-    return <Square value={squares[i]} onClick={() => onClick(i)} />;
-  };
-
-  return (
-    <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-    </div>
-  );
-};
+import { SquareState } from './utils/types';
+import { calculateWinner } from './utils/helpers';
+import Board from './components/Board';
+import './App.css'
 
 const Game: React.FC = () => {
-  const [history, setHistory] = useState<Player[][]>([initialBoard]);
+  const [history, setHistory] = useState<SquareState[][]>([Array(9).fill(null)]);
   const [stepNumber, setStepNumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
 
@@ -89,6 +35,7 @@ const Game: React.FC = () => {
 
   const moves = history.map((_, move) => {
     const desc = move ? `Go to move #${move}` : 'Go to game start';
+    
     return (
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{desc}</button>
@@ -104,7 +51,7 @@ const Game: React.FC = () => {
   }
 
   return (
-    <div className="game">
+    <div className="container">
       <div className="game-board">
         <Board squares={current} onClick={handleClick} />
       </div>
