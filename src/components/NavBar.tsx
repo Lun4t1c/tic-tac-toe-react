@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import '../styles/NavBar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -15,11 +14,11 @@ function NavBar() {
     return (
         <div className='navbar'>
 
-            <button className={"navbar-button " + (activePage === '/' ? "navbar-button-active-page" : '')} onClick={() => navigateTo('/')}>
+            <button className={activePage === '/' ? "navbar-button-active-page" : 'navbar-button'} onClick={() => navigateTo('/')}>
                 Local
             </button>
 
-            <button className={"navbar-button " + (activePage === '/ai' ? "navbar-button-active-page" : '')} onClick={() => navigateTo('/ai')}>
+            <button className={activePage === '/ai' ? "navbar-button-active-page" : 'navbar-button'} onClick={() => navigateTo('/ai')}>
                 AI
             </button>
 
