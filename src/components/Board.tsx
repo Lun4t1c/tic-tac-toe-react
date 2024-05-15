@@ -2,9 +2,19 @@ import { SquareState } from "../utils/types";
 import Square from "./Square";
 import '../styles/Board.css'
 
-const Board: React.FC<{ squares: SquareState[]; onClick: (i: number) => void }> = ({ squares, onClick }) => {
+const Board: React.FC<{ squares: SquareState[]; xIsNext: boolean; onClick: (i: number) => void }> = ({ squares, xIsNext, onClick }) => {
+    const getHoverSymbol = (i: number): string => {
+        switch (squares[i]) {
+            case 'O':
+            case 'X':
+                return '';
+            case null:
+                return xIsNext ? 'X' : 'O';
+        }
+    }
+
     const renderSquare = (i: number) => {
-        return <Square value={squares[i]} onClick={() => onClick(i)} />;
+        return <Square value={squares[i]} hoverSymbol={getHoverSymbol(i)} onClick={() => onClick(i)} />;
     };
 
     return (

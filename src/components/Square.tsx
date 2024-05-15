@@ -1,10 +1,23 @@
+import { useState } from 'react';
 import { SquareState } from "../utils/types";
 import '../styles/Square.css'
 
-const Square: React.FC<{ value: SquareState; onClick: () => void }> = ({ value, onClick }) => {
+const Square: React.FC<{ value: SquareState; hoverSymbol: string | null; onClick: () => void; }> = ({ value, hoverSymbol, onClick }) => {
+    const [symbol, setSymbol] = useState<string>(value ? value : '');
+    console.log(hoverSymbol);
+
+    const onMouseEnter = (): void => {
+        if (hoverSymbol)
+            setSymbol(hoverSymbol);
+    }
+
+    const onMouseLeave = (): void => {
+        setSymbol(value ? value : '');
+    }
+
     return (
-        <div className="square" onClick={onClick}>
-            {value}
+        <div className={value ? 'square' : 'square-empty'} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {symbol}
         </div>
     );
 };

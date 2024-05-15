@@ -58,7 +58,7 @@ const Game: React.FC = () => {
       </div>
 
       <div className="game-board">
-        <Board squares={current} onClick={handleClick} />
+        <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
       </div>
 
       <div className="game-info">
