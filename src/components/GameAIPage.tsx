@@ -23,7 +23,7 @@ const Game: React.FC = () => {
             // If it's not the player's turn, trigger AI move
             makeAiMove();
         }
-    }, [history, xIsNext]);
+    });
 
     const handleClick = (i: number) => {
         const newHistory = history.slice(0, stepNumber + 1);
