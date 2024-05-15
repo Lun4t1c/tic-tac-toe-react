@@ -43,6 +43,8 @@ const Game: React.FC = () => {
     };
 
     const makeAiMove = (): void => {
+        if (winner) return;
+
         const newHistory = history.slice(0, stepNumber + 1);
         const currentBoard = newHistory[newHistory.length - 1];
         const squares = [...currentBoard];
