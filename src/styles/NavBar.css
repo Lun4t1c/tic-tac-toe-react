@@ -1,0 +1,50 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+    padding: 0.3rem;
+
+    height: 3rem;
+    width: 100%;
+
+    background-color: #444;
+}
+
+
+.navbar-button {
+    width: 6rem;
+
+    border: none;
+    background-color: #333;
+    color: #fff;
+
+    transition: background-color 0.3s;
+
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.navbar-button:hover {
+    cursor: pointer;
+    background-color: #555;
+}
+
+.navbar-button:disabled {
+    background-color: #363535;
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.navbar-button-active-page {
+    background-color: #888495;
+    color: #282727;
+    width: 6rem;
+
+    border: none;
+
+    font-size: 16px;
+    border-radius: 5px;
+}
