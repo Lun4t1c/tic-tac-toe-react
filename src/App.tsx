@@ -53,7 +53,9 @@ const Game: React.FC = () => {
   return (
     <div className="container">
 
-      <div>{status}</div>
+      <div className='game-status-info'>
+        {status}
+      </div>
 
       <div className="game-board">
         <Board squares={current} onClick={handleClick} />

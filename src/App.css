@@ -3,4 +3,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  color: #fff;
+}
+
+.game-status-info {
+  font-size: 2rem;
+  margin: 1rem 0 1rem 0;
 }
