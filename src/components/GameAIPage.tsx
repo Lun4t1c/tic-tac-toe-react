@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/GameLocalPage.css'
-import { SquareState } from '../utils/types';
+import '../styles/GameAIPage.css'
+import { AlgorithmType, SquareState } from '../utils/types';
 import { calculateWinner, getRandomNumber } from '../utils/helpers';
 import Board from './Board';
-//import Board from './Board';
 
 const Game: React.FC = () => {
+    const SUPPORTED_ALGORITHMS = ['Random'];
+
     const [history, setHistory] = useState<SquareState[][]>([Array(9).fill(null)]);
     const [stepNumber, setStepNumber] = useState<number>(0);
     const [xIsNext, setXIsNext] = useState<boolean>(true);
 
     const current = history[stepNumber];
     const winner = calculateWinner(current);
+
+    let algorithmTypesTranslations: {
+        [key in AlgorithmType]: string;
+    } = {
+        'Random': 'Random',
+        'AlfaBetaPruning': 'Alfa beta pruning',
+        'DecisionTree': 'Decision tree',
+        'MinMax': 'MinMax'
+    };
 
     useEffect(() => {
         if (!winner && !current.includes(null)) {
@@ -85,6 +95,14 @@ const Game: React.FC = () => {
 
     return (
         <div className="container">
+            <div className="algorithm-types-container">
+                {Object.keys(algorithmTypesTranslations).map((key, index) => (
+                    <button disabled={!(SUPPORTED_ALGORITHMS.includes(key))} className='algorithm-button' key={index}>
+                        {/* Display the translation for each algorithm */}
+                        {algorithmTypesTranslations[key as AlgorithmType]}
+                    </button>
+                ))}
+            </div>
 
             <div className='game-status-info'>
                 {status}
