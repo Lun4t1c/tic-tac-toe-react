@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/GameAIPage.css'
-import { AlgorithmType, SquareState } from '../utils/types';
+import { AiDifficulty, AlgorithmType, SquareState } from '../utils/types';
 import { calculateWinner, getRandomNumber } from '../utils/helpers';
 import Board from './Board';
 
 const Game: React.FC = () => {
-    const SUPPORTED_ALGORITHMS = ['Random'];
+    const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
 
     const [history, setHistory] = useState<SquareState[][]>([Array(9).fill(null)]);
     const [stepNumber, setStepNumber] = useState<number>(0);
     const [xIsNext, setXIsNext] = useState<boolean>(true);
+
+    const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmType>('Random');
+    const [currentDifficulty, setCurrentDifficulty] = useState<AiDifficulty>('Medium');
 
     const current = history[stepNumber];
     const winner = calculateWinner(current);
@@ -21,6 +24,14 @@ const Game: React.FC = () => {
         'AlfaBetaPruning': 'Alfa beta pruning',
         'DecisionTree': 'Decision tree',
         'MinMax': 'MinMax'
+    };
+
+    let aiDifficultyTranslations: {
+        [key in AiDifficulty]: string;
+    } = {
+        'Easy': 'Easy',
+        'Medium': 'Medium',
+        'Hard': 'Hard'
     };
 
     useEffect(() => {
@@ -97,9 +108,25 @@ const Game: React.FC = () => {
         <div className="container">
             <div className="algorithm-types-container">
                 {Object.keys(algorithmTypesTranslations).map((key, index) => (
-                    <button disabled={!(SUPPORTED_ALGORITHMS.includes(key))} className='algorithm-button' key={index}>
-                        {/* Display the translation for each algorithm */}
+                    <button
+                        disabled={!(SUPPORTED_ALGORITHMS.includes(key as AlgorithmType))}
+                        className={key === currentAlgorithm ? 'algorithm-button-highlighted' : 'algorithm-button'}
+                        key={index}
+                        onClick={() => setCurrentAlgorithm(key as AlgorithmType)}
+                    >
                         {algorithmTypesTranslations[key as AlgorithmType]}
+                    </button>
+                ))}
+            </div>
+
+            <div className="difficulty-switch-container">
+                {Object.keys(aiDifficultyTranslations).map((key, index) => (
+                    <button
+                        className={key === currentDifficulty ? 'algorithm-button-highlighted' : 'algorithm-button'}
+                        key={index}
+                        onClick={() => setCurrentDifficulty(key as AiDifficulty)}
+                    >
+                        {aiDifficultyTranslations[key as AiDifficulty]}
                     </button>
                 ))}
             </div>
