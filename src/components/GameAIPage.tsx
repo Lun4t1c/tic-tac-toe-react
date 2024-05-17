@@ -85,15 +85,17 @@ const Game: React.FC = () => {
         setStepNumber(newHistory.length);
         setXIsNext(!xIsNext);
 
-        const endTime = performance.now();
-        const executionTime = endTime - startTime;
-        console.log(`Execution time: ${executionTime} milliseconds`);
-        setLastAiTime(executionTime);
+        setLastAiTime(performance.now() - startTime);
     }
 
     const jumpTo = (step: number) => {
         setStepNumber(step);
         setXIsNext(step % 2 === 0);
+    };
+
+    const resetGame = (): void => {
+        setStepNumber(0);
+        setXIsNext(true);
     };
 
     const moves = history.map((_, move) => {
@@ -122,7 +124,21 @@ const Game: React.FC = () => {
 
             </div>
 
-            <div className="right-container">
+            <div className="center-container">
+                <div className='game-status-info'>
+                    {status}
+                </div>
+
+                <div className="game-board">
+                    <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
+                </div>
+            </div>
+
+            <div className='right-container'>
+                <button className="algorithm-button" onClick={() => resetGame()}>
+                    Reset
+                </button>
+
                 <div className="algorithm-types-container">
                     {Object.keys(algorithmTypesTranslations).map((key, index) => (
                         <button
@@ -146,20 +162,6 @@ const Game: React.FC = () => {
                             {aiDifficultyTranslations[key as AiDifficulty]}
                         </button>
                     ))}
-                </div>
-
-                <div className='game-status-info'>
-                    {status}
-                </div>
-
-                <div className="game-board">
-                    <Board squares={current} xIsNext={xIsNext} boardSize={BOARD_SIZE} onClick={handleClick} />
-                </div>
-            </div>
-
-            <div className='right-container'>
-                <div className="game-info">
-                    <ol>{moves}</ol>
                 </div>
             </div>
         </div>
