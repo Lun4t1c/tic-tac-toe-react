@@ -67,6 +67,8 @@ const Game: React.FC = () => {
     const makeAiMove = (): void => {
         if (winner) return;
 
+        const startTime = performance.now();
+
         const newHistory = history.slice(0, stepNumber + 1);
         const currentBoard = newHistory[newHistory.length - 1];
         const squares = [...currentBoard];
@@ -82,7 +84,10 @@ const Game: React.FC = () => {
         setStepNumber(newHistory.length);
         setXIsNext(!xIsNext);
 
-        setLastAiTime(69);
+        const endTime = performance.now();
+        const executionTime = endTime - startTime;
+        console.log(`Execution time: ${executionTime} milliseconds`);
+        setLastAiTime(executionTime);
     }
 
     const jumpTo = (step: number) => {
@@ -111,7 +116,7 @@ const Game: React.FC = () => {
         <div className="container-grid">
             <div className="left-container" >
                 {lastAiTime >= 0 && (
-                    `Algorithm took ${lastAiTime}s`
+                    `Algorithm took ${lastAiTime}ms`
                 )}
 
             </div>
