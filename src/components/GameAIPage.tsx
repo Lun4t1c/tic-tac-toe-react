@@ -121,7 +121,17 @@ const Game: React.FC = () => {
 
             </div>
 
-            <div className="right-container">
+            <div className="center-container">
+                <div className='game-status-info'>
+                    {status}
+                </div>
+
+                <div className="game-board">
+                    <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
+                </div>
+            </div>
+
+            <div className='right-container'>
                 <div className="algorithm-types-container">
                     {Object.keys(algorithmTypesTranslations).map((key, index) => (
                         <button
@@ -145,20 +155,6 @@ const Game: React.FC = () => {
                             {aiDifficultyTranslations[key as AiDifficulty]}
                         </button>
                     ))}
-                </div>
-
-                <div className='game-status-info'>
-                    {status}
-                </div>
-
-                <div className="game-board">
-                    <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
-                </div>
-            </div>
-
-            <div className='right-container'>
-                <div className="game-info">
-                    <ol>{moves}</ol>
                 </div>
             </div>
         </div>
