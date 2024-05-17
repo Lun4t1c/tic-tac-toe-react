@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    
+
     font-size: 1.5rem;
     color: #fff;
 }
@@ -28,7 +28,7 @@
 .right-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
 
     font-size: 1rem;
@@ -37,19 +37,19 @@
 
 .algorithm-types-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    gap: 2rem;
+    gap: 0.2rem;
 
     margin: 1rem 0 0 0;
 }
 
 .difficulty-switch-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.2rem;
 
     margin: 1rem 0 0 0;
 
@@ -57,7 +57,7 @@
 }
 
 .algorithm-button {
-    width: fit-content;
+    width: 100%;
     padding: 0.5rem;
 
     border: none;
@@ -83,7 +83,7 @@
 }
 
 .algorithm-button-highlighted {
-    width: fit-content;
+    width: 100%;
     padding: 0.5rem;
 
     border: none;
