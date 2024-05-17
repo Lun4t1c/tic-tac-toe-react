@@ -6,8 +6,9 @@ import Board from './Board';
 
 const Game: React.FC = () => {
     const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
+    const BOARD_SIZE = 3;
 
-    const [history, setHistory] = useState<SquareState[][]>([Array(9).fill(null)]);
+    const [history, setHistory] = useState<SquareState[][]>([Array(BOARD_SIZE * BOARD_SIZE).fill(null)]);
     const [stepNumber, setStepNumber] = useState<number>(0);
     const [xIsNext, setXIsNext] = useState<boolean>(true);
 
@@ -152,7 +153,7 @@ const Game: React.FC = () => {
                 </div>
 
                 <div className="game-board">
-                    <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
+                    <Board squares={current} xIsNext={xIsNext} boardSize={BOARD_SIZE} onClick={handleClick} />
                 </div>
             </div>
 
