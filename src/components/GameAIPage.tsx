@@ -11,6 +11,7 @@ const Game: React.FC = () => {
     const [stepNumber, setStepNumber] = useState<number>(0);
     const [xIsNext, setXIsNext] = useState<boolean>(true);
 
+    const [lastAiTime, setLastAiTime] = useState<number>(-1);
     const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmType>('Random');
     const [currentDifficulty, setCurrentDifficulty] = useState<AiDifficulty>('Medium');
 
@@ -80,6 +81,8 @@ const Game: React.FC = () => {
         setHistory([...newHistory, squares]);
         setStepNumber(newHistory.length);
         setXIsNext(!xIsNext);
+
+        setLastAiTime(69);
     }
 
     const jumpTo = (step: number) => {
@@ -105,44 +108,54 @@ const Game: React.FC = () => {
     }
 
     return (
-        <div className="container">
-            <div className="algorithm-types-container">
-                {Object.keys(algorithmTypesTranslations).map((key, index) => (
-                    <button
-                        disabled={!(SUPPORTED_ALGORITHMS.includes(key as AlgorithmType))}
-                        className={key === currentAlgorithm ? 'algorithm-button-highlighted' : 'algorithm-button'}
-                        key={index}
-                        onClick={() => setCurrentAlgorithm(key as AlgorithmType)}
-                    >
-                        {algorithmTypesTranslations[key as AlgorithmType]}
-                    </button>
-                ))}
+        <div className="container-grid">
+            <div className="left-container" >
+                {lastAiTime >= 0 && (
+                    `Algorithm took ${lastAiTime}s`
+                )}
+
             </div>
 
-            <div className="difficulty-switch-container">
-                {Object.keys(aiDifficultyTranslations).map((key, index) => (
-                    <button
-                        className={key === currentDifficulty ? 'algorithm-button-highlighted' : 'algorithm-button'}
-                        key={index}
-                        onClick={() => setCurrentDifficulty(key as AiDifficulty)}
-                    >
-                        {aiDifficultyTranslations[key as AiDifficulty]}
-                    </button>
-                ))}
+            <div className="right-container">
+                <div className="algorithm-types-container">
+                    {Object.keys(algorithmTypesTranslations).map((key, index) => (
+                        <button
+                            disabled={!(SUPPORTED_ALGORITHMS.includes(key as AlgorithmType))}
+                            className={key === currentAlgorithm ? 'algorithm-button-highlighted' : 'algorithm-button'}
+                            key={index}
+                            onClick={() => setCurrentAlgorithm(key as AlgorithmType)}
+                        >
+                            {algorithmTypesTranslations[key as AlgorithmType]}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="difficulty-switch-container">
+                    {Object.keys(aiDifficultyTranslations).map((key, index) => (
+                        <button
+                            className={key === currentDifficulty ? 'algorithm-button-highlighted' : 'algorithm-button'}
+                            key={index}
+                            onClick={() => setCurrentDifficulty(key as AiDifficulty)}
+                        >
+                            {aiDifficultyTranslations[key as AiDifficulty]}
+                        </button>
+                    ))}
+                </div>
+
+                <div className='game-status-info'>
+                    {status}
+                </div>
+
+                <div className="game-board">
+                    <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
+                </div>
             </div>
 
-            <div className='game-status-info'>
-                {status}
+            <div className='right-container'>
+                <div className="game-info">
+                    <ol>{moves}</ol>
+                </div>
             </div>
-
-            <div className="game-board">
-                <Board squares={current} xIsNext={xIsNext} onClick={handleClick} />
-            </div>
-
-            <div className="game-info">
-                <ol>{moves}</ol>
-            </div>
-
         </div>
     );
 };
