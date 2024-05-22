@@ -1,16 +1,19 @@
 .container-grid {
     display: grid;
-    grid-template-columns: repeat(3, 33%);
+    grid-template-columns: 20% 60% 20%;
     grid-template-rows: repeat(1, 100%);
+    margin: 0 1rem 0 1rem;
+    min-height: 100%;
 }
 
 .left-container {
-    display: flex;
     flex-direction: column;
     flex-grow: 0;
     justify-content: center;
     align-items: center;
     height: 100%;
+
+    padding: 2rem 0 0 0;
 
     font-size: 1.5rem;
     color: #fff;
@@ -26,10 +29,12 @@
 }
 
 .right-container {
-    display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     flex-direction: column;
+    flex-grow: 0;
+
+    padding: 2rem 0 0 0;
 
     font-size: 1rem;
     color: #fff;
