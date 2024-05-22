@@ -66,7 +66,6 @@ const Game: React.FC = () => {
             return;
         }
 
-        //squares[i] = xIsNext ? 'X' : 'O';
         squares[i] = 'X';
 
         setHistory([...newHistory, squares]);
@@ -129,7 +128,9 @@ const Game: React.FC = () => {
             </div>
 
             <div className='right-container'>
-                <NumericSelector value={boardSize} onChange={initializeGame}/>
+                <div className='board-size-container'>
+                    <NumericSelector value={boardSize} onChange={initializeGame} />
+                </div>
 
                 <button className="algorithm-button" onClick={() => resetGame()}>
                     Reset
