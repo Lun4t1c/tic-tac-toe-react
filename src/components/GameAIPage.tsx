@@ -3,12 +3,13 @@ import '../styles/GameAIPage.css'
 import { AiDifficulty, AlgorithmType, SquareState } from '../utils/types';
 import { calculateWinner, getRandomNumber } from '../utils/helpers';
 import Board from './Board';
+import NumericSelector from './NumericSelector';
 
 const Game: React.FC = () => {
     const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
-    const BOARD_SIZE = 4;
 
-    const [history, setHistory] = useState<SquareState[][]>([Array(BOARD_SIZE * BOARD_SIZE).fill(null)]);
+    const [boardSize, setBoardSize] = useState<number>(5);
+    const [history, setHistory] = useState<SquareState[][]>([Array(boardSize * boardSize).fill(null)]);
     const [stepNumber, setStepNumber] = useState<number>(0);
     const [xIsNext, setXIsNext] = useState<boolean>(true);
 
@@ -18,6 +19,14 @@ const Game: React.FC = () => {
 
     const current = history[stepNumber];
     const winner = calculateWinner(current);
+
+    const initializeGame = (size: number): void => {
+        setBoardSize(size);
+        setHistory([Array(size * size).fill(null)]);
+        setStepNumber(0);
+        setXIsNext(true);
+        setLastAiTime(-1);
+    }
 
     let algorithmTypesTranslations: {
         [key in AlgorithmType]: string;
@@ -76,7 +85,7 @@ const Game: React.FC = () => {
 
         let aiMove: number;
         do {
-            aiMove = getRandomNumber(0, (BOARD_SIZE * BOARD_SIZE) - 1);
+            aiMove = getRandomNumber(0, (boardSize * boardSize) - 1);
         } while (squares[aiMove] !== null);
 
         squares[aiMove] = xIsNext ? 'X' : 'O';
@@ -115,11 +124,13 @@ const Game: React.FC = () => {
                 </div>
 
                 <div className="game-board">
-                    <Board squares={current} xIsNext={xIsNext} boardSize={BOARD_SIZE} onClick={handleClick} />
+                    <Board squares={current} xIsNext={xIsNext} boardSize={boardSize} onClick={handleClick} />
                 </div>
             </div>
 
             <div className='right-container'>
+                <NumericSelector value={boardSize} onChange={initializeGame}/>
+
                 <button className="algorithm-button" onClick={() => resetGame()}>
                     Reset
                 </button>
