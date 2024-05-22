@@ -6,7 +6,7 @@ import Board from './Board';
 
 const Game: React.FC = () => {
     const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
-    const BOARD_SIZE = 3;
+    const BOARD_SIZE = 4;
 
     const [history, setHistory] = useState<SquareState[][]>([Array(BOARD_SIZE * BOARD_SIZE).fill(null)]);
     const [stepNumber, setStepNumber] = useState<number>(0);
@@ -76,7 +76,7 @@ const Game: React.FC = () => {
 
         let aiMove: number;
         do {
-            aiMove = getRandomNumber(0, 8);
+            aiMove = getRandomNumber(0, (BOARD_SIZE * BOARD_SIZE) - 1);
         } while (squares[aiMove] !== null);
 
         squares[aiMove] = xIsNext ? 'X' : 'O';
