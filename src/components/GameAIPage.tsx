@@ -7,21 +7,45 @@ import NumericSelector from './NumericSelector';
 import { makeAiMoveAlfaBetaPruning, makeAiMoveDecisionTree, makeAiMoveMinMax, makeAiMoveRandom } from '../utils/aiAlgorithms';
 
 const Game: React.FC = () => {
-    const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
+    const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random', 'MinMax'];
     const BOARD_MIN_SIZE: number = 3;
     const BOARD_MAX_SIZE: number = 6;
 
-    const [boardSize, setBoardSize] = useState<number>(5);
+    const [boardSize, setBoardSize] = useState<number>(() => {
+        const item = localStorage.getItem('ai-board-size');
+        if (item)
+            return parseInt(item);
+        return BOARD_MIN_SIZE;
+    });
     const [history, setHistory] = useState<SquareState[][]>([Array(boardSize * boardSize).fill(null)]);
     const [stepNumber, setStepNumber] = useState<number>(0);
     const [xIsNext, setXIsNext] = useState<boolean>(true);
 
     const [lastAiTime, setLastAiTime] = useState<number>(-1);
-    const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmType>('Random');
-    const [currentDifficulty, setCurrentDifficulty] = useState<AiDifficulty>('Medium');
+    const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmType>((): AlgorithmType => {
+        const item = localStorage.getItem('ai-current-algorithm');
+        return item as AlgorithmType ?? 'Random';
+    });
+    const [currentDifficulty, setCurrentDifficulty] = useState<AiDifficulty>((): AiDifficulty => {
+        const item = localStorage.getItem('ai-current-difficulty');
+        return item as AiDifficulty ?? 'Medium';
+    });
 
     const current = history[stepNumber];
     const winner = calculateWinner(current);
+
+    useEffect(() => {
+        localStorage.setItem('ai-board-size', boardSize.toString());
+    }, [boardSize]);
+
+    useEffect(() => {
+        localStorage.setItem('ai-current-algorithm', currentAlgorithm);
+    }, [currentAlgorithm]);
+
+    useEffect(() => {
+        localStorage.setItem('ai-current-difficulty', currentDifficulty);
+    }, [currentDifficulty]);
+
 
     const initializeGame = (size: number): void => {
         setBoardSize(size);
