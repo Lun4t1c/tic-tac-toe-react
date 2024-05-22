@@ -7,6 +7,8 @@ import NumericSelector from './NumericSelector';
 
 const Game: React.FC = () => {
     const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
+    const BOARD_MIN_SIZE: number = 3;
+    const BOARD_MAX_SIZE: number = 6;
 
     const [boardSize, setBoardSize] = useState<number>(5);
     const [history, setHistory] = useState<SquareState[][]>([Array(boardSize * boardSize).fill(null)]);
@@ -129,7 +131,7 @@ const Game: React.FC = () => {
 
             <div className='right-container'>
                 <div className='board-size-container'>
-                    <NumericSelector value={boardSize} onChange={initializeGame} />
+                    <NumericSelector value={boardSize} minValue={BOARD_MIN_SIZE} maxValue={BOARD_MAX_SIZE} onChange={initializeGame} />
                 </div>
 
                 <button className="algorithm-button" onClick={() => resetGame()}>
