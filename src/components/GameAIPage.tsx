@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/GameAIPage.css'
 import { AiDifficulty, AlgorithmType, SquareState } from '../utils/types';
-import { calculateWinner, getRandomNumber } from '../utils/helpers';
+import { calculateWinner } from '../utils/helpers';
 import Board from './Board';
 import NumericSelector from './NumericSelector';
+import { makeAiMoveAlfaBetaPruning, makeAiMoveDecisionTree, makeAiMoveMinMax, makeAiMoveRandom } from '../utils/aiAlgorithms';
 
 const Game: React.FC = () => {
     const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random'];
@@ -85,9 +86,23 @@ const Game: React.FC = () => {
         const squares = [...currentBoard];
 
         let aiMove: number;
-        do {
-            aiMove = getRandomNumber(0, (boardSize * boardSize) - 1);
-        } while (squares[aiMove] !== null);
+        switch (currentAlgorithm) {
+            case 'Random':
+                aiMove = makeAiMoveRandom(squares);
+                break;
+            case 'MinMax':
+                aiMove = makeAiMoveMinMax(squares);
+                break;
+            case 'AlfaBetaPruning':
+                aiMove = makeAiMoveAlfaBetaPruning(squares);
+                break;
+            case 'DecisionTree':
+                aiMove = makeAiMoveDecisionTree(squares);
+                break;
+            default:
+                aiMove = makeAiMoveRandom(squares);
+                break;
+        }
 
         squares[aiMove] = xIsNext ? 'X' : 'O';
 
