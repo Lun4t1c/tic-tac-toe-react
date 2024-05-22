@@ -88,25 +88,10 @@ const Game: React.FC = () => {
         setLastAiTime(performance.now() - startTime);
     }
 
-    const jumpTo = (step: number) => {
-        setStepNumber(step);
-        setXIsNext(step % 2 === 0);
-    };
-
     const resetGame = (): void => {
         setStepNumber(0);
         setXIsNext(true);
     };
-
-    const moves = history.map((_, move) => {
-        const desc = move ? `Go to move #${move}` : 'Go to game start';
-
-        return (
-            <li key={move}>
-                <button onClick={() => jumpTo(move)}>{desc}</button>
-            </li>
-        );
-    });
 
     let status;
     if (winner) {
