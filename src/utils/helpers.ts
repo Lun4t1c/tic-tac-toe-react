@@ -47,3 +47,12 @@ export const calculateWinner = (squares: SquareState[]): SquareState => {
 export function getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function formatMilliseconds(milliseconds: number): string {
+    const seconds = milliseconds / 1000;
+    if (seconds >= 1) {
+        return seconds.toFixed(2).replace(/\.?0+$/, '') + 's';
+    }
+    const res =  milliseconds.toFixed(6);
+    return res.replace(/\.?0+$/, '') + 'ms';
+}

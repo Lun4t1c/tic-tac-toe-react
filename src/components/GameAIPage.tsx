@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/GameAIPage.css'
 import { AiDifficulty, AlgorithmType, SquareState } from '../utils/types';
-import { calculateWinner } from '../utils/helpers';
+import { calculateWinner, formatMilliseconds } from '../utils/helpers';
 import Board from './Board';
 import NumericSelector from './NumericSelector';
 import { makeAiMoveAlfaBetaPruning, makeAiMoveDecisionTree, makeAiMoveMinMax, makeAiMoveRandom } from '../utils/aiAlgorithms';
@@ -22,6 +22,7 @@ const Game: React.FC = () => {
     const [xIsNext, setXIsNext] = useState<boolean>(true);
 
     const [lastAiTime, setLastAiTime] = useState<number>(-1);
+    const [lastAiTimeString, setLastAiTimeString] = useState<string>('');
     const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmType>((): AlgorithmType => {
         const item = localStorage.getItem('ai-current-algorithm');
         return item as AlgorithmType ?? 'Random';
@@ -45,6 +46,10 @@ const Game: React.FC = () => {
     useEffect(() => {
         localStorage.setItem('ai-current-difficulty', currentDifficulty);
     }, [currentDifficulty]);
+
+    useEffect(() => {
+        setLastAiTimeString(formatMilliseconds(lastAiTime));
+    }, [lastAiTime]);
 
 
     const initializeGame = (size: number): void => {
@@ -139,6 +144,7 @@ const Game: React.FC = () => {
 
     const resetGame = (): void => {
         setStepNumber(0);
+        setLastAiTime(-1);
         setXIsNext(true);
     };
 
@@ -153,7 +159,7 @@ const Game: React.FC = () => {
         <div className="container-grid">
             <div className="left-container" >
                 {lastAiTime >= 0 && (
-                    `Algorithm took ${lastAiTime}ms`
+                    `Algorithm took ${lastAiTimeString}`
                 )}
 
             </div>
