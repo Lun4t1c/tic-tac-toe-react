@@ -36,7 +36,7 @@ const Game: React.FC = () => {
     const winner = calculateWinner(current);
 
     useEffect(() => {
-        localStorage.setItem('ai-board-size', boardSize.toString());
+        localStorage.setItem('local-board-size', boardSize.toString());
     }, [boardSize]);
 
     useEffect(() => {
