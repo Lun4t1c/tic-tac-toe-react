@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/GameLocalPage.css'
 import { SquareState } from '../utils/types';
 import { calculateWinner } from '../utils/helpers';
@@ -19,6 +19,10 @@ const Game: React.FC = () => {
   const [history, setHistory] = useState<SquareState[][]>([Array(boardSize * boardSize).fill(null)]);
   const [stepNumber, setStepNumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
+
+  useEffect(() => {
+    localStorage.setItem('local-board-size', boardSize.toString());
+  }, [boardSize]);
 
   const current = history[stepNumber];
   const winner = calculateWinner(current);
