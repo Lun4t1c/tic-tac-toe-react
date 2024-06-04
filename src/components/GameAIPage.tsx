@@ -4,10 +4,10 @@ import { AiDifficulty, AlgorithmType, SquareState } from '../utils/types';
 import { calculateWinner, formatMilliseconds } from '../utils/helpers';
 import Board from './Board';
 import NumericSelector from './NumericSelector';
-import { makeAiMoveAlfaBetaPruning, makeAiMoveDecisionTree, makeAiMoveMinMax, makeAiMoveRandom } from '../utils/aiAlgorithms';
+import { makeAiMoveAlfaBetaPruning, makeAiMoveMonteCarlo, makeAiMoveMinMax, makeAiMoveRandom } from '../utils/aiAlgorithms';
 
 const Game: React.FC = () => {
-    const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random', 'MinMax'];
+    const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random', 'MinMax', 'AlfaBetaPruning'];
     const BOARD_MIN_SIZE: number = 3;
     const BOARD_MAX_SIZE: number = 6;
 
@@ -65,7 +65,7 @@ const Game: React.FC = () => {
     } = {
         'Random': 'Random',
         'AlfaBetaPruning': 'Alfa beta pruning',
-        'DecisionTree': 'Decision tree',
+        'MonteCarlo': 'MonteCarlo',
         'MinMax': 'MinMax'
     };
 
@@ -125,8 +125,8 @@ const Game: React.FC = () => {
             case 'AlfaBetaPruning':
                 aiMove = makeAiMoveAlfaBetaPruning(squares);
                 break;
-            case 'DecisionTree':
-                aiMove = makeAiMoveDecisionTree(squares);
+            case 'MonteCarlo':
+                aiMove = makeAiMoveMonteCarlo(squares);
                 break;
             default:
                 aiMove = makeAiMoveRandom(squares);
