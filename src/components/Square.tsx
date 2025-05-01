@@ -6,20 +6,12 @@ const Square: React.FC<{ value: SquareState; hoverSymbol: string | null; onClick
     const [symbol, setSymbol] = useState<string>(value ? value : '');
 
     useEffect(() => {
-        setSymbol(value ? value : '');
-    }, [value]);
-
-    const onMouseEnter = (): void => {
         if (hoverSymbol)
             setSymbol(hoverSymbol);
-    }
-
-    const onMouseLeave = (): void => {
-        setSymbol(value ? value : '');
-    }
+    }, [hoverSymbol]);
 
     return (
-        <div className={value ? 'square' : 'square-empty'} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <div className={value ? 'square' : 'square-empty'} onClick={onClick}>
             {symbol}
         </div>
     );
