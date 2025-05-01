@@ -71,6 +71,12 @@ const Game: React.FC = () => {
         <Board squares={current} xIsNext={xIsNext} boardSize={boardSize} onClick={handleClick} />
       </div>
 
+      {stepNumber > 0 &&
+        <button className="start-over-btn"  onClick={() => initializeGame(boardSize)}>
+          Start over
+        </button>
+      }
+
     </div>
   );
 };
