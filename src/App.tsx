@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/NavBar'
-import GameLocalPage from './components/GameLocalPage';
-import GameAIPage from './components/GameAIPage';
+import NavBar from './components/shared/Navbar/NavBar'
+import GameLocalPage from './components/pages/GameLocalPage/GameLocalPage';
+import GameAIPage from './components/pages/GameAIPage/GameAIPage';
 import DocumentTitle from 'react-document-title';
 
 function App() {

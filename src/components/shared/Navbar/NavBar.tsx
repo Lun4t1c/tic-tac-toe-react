@@ -1,7 +1,7 @@
-import '../styles/NavBar.css';
+import './NavBar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { GameSubPage } from '../utils/types';
+import { GameSubPage } from '../../../utils/types';
 
 function NavBar() {
     const navigate = useNavigate();

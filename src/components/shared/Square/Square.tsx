@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { SquareState } from "../utils/types";
-import '../styles/Square.css'
+import { SquareState } from "../../../utils/types";
+import './Square.css'
 
 const Square: React.FC<{ value: SquareState; hoverSymbol: string | null; onClick: () => void; }> = ({ value, hoverSymbol, onClick }) => {
     const [symbol, setSymbol] = useState<string>(value ? value : '');

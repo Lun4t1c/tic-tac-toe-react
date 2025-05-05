@@ -1,4 +1,4 @@
-import '../styles/NumericSelector.css'
+import './NumericSelector.css'
 
 interface NumericSelectorProps {
     value: number;

@@ -1,6 +1,6 @@
-import { SquareState } from "../utils/types";
-import Square from "./Square";
-import '../styles/Board.css'
+import { SquareState } from "../../../utils/types";
+import Square from "../Square/Square";
+import './Board.css'
 
 const Board: React.FC<{ squares: SquareState[]; xIsNext: boolean; boardSize: number; onClick: (i: number) => void }> = ({ squares, xIsNext, boardSize, onClick }) => {
     const getHoverSymbol = (i: number): string => {

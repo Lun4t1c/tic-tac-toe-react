@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/GameLocalPage.css'
-import { SquareState } from '../utils/types';
-import { calculateWinner } from '../utils/helpers';
-import Board from './Board';
-import NumericSelector from './NumericSelector';
+import './GameLocalPage.css'
+import { SquareState } from '../../../utils/types';
+import { calculateWinner } from '../../../utils/helpers';
+import Board from '../../shared/Board/Board';
+import NumericSelector from '../../shared/NumericSelector/NumericSelector';
 
 const Game: React.FC = () => {
   const BOARD_MIN_SIZE: number = 3;

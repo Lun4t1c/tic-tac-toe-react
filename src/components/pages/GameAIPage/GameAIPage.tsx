@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/GameAIPage.css'
-import { AiDifficulty, AlgorithmType, SquareState } from '../utils/types';
-import { calculateWinner, formatMilliseconds } from '../utils/helpers';
-import Board from './Board';
-import NumericSelector from './NumericSelector';
-import { makeAiMoveAlfaBetaPruning, makeAiMoveMonteCarlo, makeAiMoveMinMax, makeAiMoveRandom } from '../utils/aiAlgorithms';
+import './GameAIPage.css'
+import Board from '../../shared/Board/Board';
+import { AiDifficulty, AlgorithmType, SquareState } from '../../../utils/types';
+import { calculateWinner, formatMilliseconds } from '../../../utils/helpers';
+import NumericSelector from '../../shared/NumericSelector/NumericSelector';
+import { makeAiMoveAlfaBetaPruning, makeAiMoveMinMax, makeAiMoveMonteCarlo, makeAiMoveRandom } from '../../../utils/aiAlgorithms';
 
 const Game: React.FC = () => {
     const SUPPORTED_ALGORITHMS: AlgorithmType[] = ['Random', 'MinMax', 'AlfaBetaPruning'];
