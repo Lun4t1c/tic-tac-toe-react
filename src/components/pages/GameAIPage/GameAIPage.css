@@ -16,7 +16,7 @@
     padding: 2rem 0 0 0;
 
     font-size: 1.5rem;
-    color: #fff;
+    color: var(--color-text-primary);
 }
 
 .center-container {
@@ -25,7 +25,7 @@
     align-items: center;
     flex-direction: column;
 
-    color: #fff;
+    color: var(--color-text-primary);
 }
 
 .right-container {
@@ -37,7 +37,7 @@
     padding: 2rem 0 0 0;
 
     font-size: 1rem;
-    color: #fff;
+    color: var(--color-text-primary);
 }
 
 .algorithm-types-container {
@@ -58,7 +58,7 @@
 
     margin: 1rem 0 0 0;
 
-    color: #fff;
+    color: var(--color-text-primary);
 }
 
 .algorithm-button {
@@ -67,7 +67,7 @@
 
     border: none;
     background-color: #333;
-    color: #fff;
+    color: var(--color-text-primary);
 
     transition: background-color 0.3s;
 
@@ -82,7 +82,7 @@
 
 .algorithm-button:disabled {
     background-color: var(--color-primary);
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     cursor: not-allowed;
     opacity: 0.6;
 }
@@ -93,7 +93,7 @@
 
     border: none;
     background-color: var(--color-secondary);
-    color: #fff;
+    color: var(--color-text-primary);
 
     transition: background-color 0.3s;
 

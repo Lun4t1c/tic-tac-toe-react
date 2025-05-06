@@ -34,6 +34,10 @@ function NavBar() {
                 Multiplayer
             </button>
 
+            <button className='burger-button'>
+                <span className='burger-text'>☰</span>
+            </button>
+
         </div>
     );
 }

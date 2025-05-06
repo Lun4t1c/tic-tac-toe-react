@@ -2,7 +2,8 @@
   --color-primary: #363535;
   --color-hover: #555;
   --color-secondary: #888495;
-  --color-text: #888;
+  --color-text-primary: #fff;
+  --color-text-secondary: #888;
 }
 
 body {
