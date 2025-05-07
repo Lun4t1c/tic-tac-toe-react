@@ -6,6 +6,7 @@ import { GameSubPage } from '../../../utils/types';
 function NavBar() {
     const navigate = useNavigate();
     const [activePage, setActivePage] = useState<GameSubPage>('Local');
+    const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
 
     const navigateTo = (page: string): void => {
         navigate(page);
@@ -17,6 +18,10 @@ function NavBar() {
                 setActivePage('AI');
                 break;
         }
+    }
+
+    const toggleSideMenu = (): void => {
+        setIsSideMenuOpen(!isSideMenuOpen);
     }
 
     return (
@@ -34,9 +39,13 @@ function NavBar() {
                 Multiplayer
             </button>
 
-            <button className='burger-button'>
-                <span className='burger-text'>☰</span>
+            <button className={`burger-button ${isSideMenuOpen ? 'open' : ''}`} onClick={toggleSideMenu}>
+                <span className={`burger-text ${isSideMenuOpen ? 'open' : ''}`}>☰</span>
             </button>
+
+            <div className={`side-menu ${isSideMenuOpen ? 'open' : ''}`}>
+                side menu
+            </div>
 
         </div>
     );

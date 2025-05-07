@@ -1,3 +1,7 @@
+:root {
+    --side-menu-width: 10rem;
+}
+
 .navbar {
     position: relative;
     display: flex;
@@ -69,6 +73,11 @@
     background-color: var(--color-primary);
 
     cursor: pointer;
+
+    transition: all ease 0.3s;
+}
+.burger-button.open {
+    transform: translateX(calc(-1 * var(--side-menu-width)));
 }
 
 .burger-text {
@@ -77,6 +86,25 @@
     transition: all ease 0.3s;
 }
 
-.burger-button:hover .burger-text{
+.burger-text.open{
     transform: rotate(-90deg);
+}
+
+.side-menu {
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: var(--color-primary);
+    width: var(--side-menu-width);
+    height: 100vw;
+    z-index: 1000;
+
+    transition: all ease 0.3s;
+    transform: translateX(100%);
+}
+.side-menu.open {
+    transform: translateX(0);
 }
